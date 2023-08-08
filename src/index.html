@@ -4,10 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width initial-scale=1.0" />
     <meta rel="stylesheet" href="style.css" />
+    <title>Cesar's Todos App</title>
 
     <script src="App.js" type="module"></script>
   </head>
   <body>
-    <div>Hello there!</div>
+    <main></main>
+
+    <template id="todo-item-template">
+      <section>
+        <div>
+          <h4>Todo Name</h4>
+          <p>Todo Status:</p>
+        </div>
+
+        <button>Edit</button>
+        <button>Delete</button>
+      </section>
+    </template>
   </body>
 </html>
