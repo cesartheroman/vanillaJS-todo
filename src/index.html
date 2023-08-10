@@ -11,16 +11,25 @@
   <body>
     <main></main>
 
-    <template id="todo-item-template">
-      <section>
-        <div>
-          <h4>Todo Name</h4>
-          <p>Todo Status:</p>
+    <template id="todo-page-template">
+      <section class="app-container">
+        <h1></h1>
+        <div id="todo-input">
+          <input type="text" id="new-todo" name="new-todo" />
+          <button>Add</button>
         </div>
-
-        <button>Edit</button>
-        <button>Delete</button>
+        <ul id="todo-list"></ul>
       </section>
+    </template>
+
+    <template id="todo-item-template">
+      <li>
+        <p class="name"></p>
+        <p class="toolbar">
+          <a href="#" class="edit-bttn"> ✏️ </a>
+          <a href="#" class="delete-bttn"> 🗑️ </a>
+        </p>
+      </li>
     </template>
   </body>
 </html>
