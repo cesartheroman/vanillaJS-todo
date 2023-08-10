@@ -1,20 +1,30 @@
 import API from './API.js';
 
-export async function loadData() {
+export async function loadTodos() {
   app.store.todosList = await API.fetchTodos();
 }
 
-export async function loadComponents() {
-  const cache = document.querySelector('main');
+export function loadComponents() {
+  const main = document.querySelector('main');
   const todoPage = document.createElement('todo-page');
-  // const todoInput = document.createElement('todo-input');
-  // const todoItem = document.createElement('todo-item');
+  const todoInput = document.createElement('todo-input');
+  const todoItem = document.createElement('todo-item');
 
-  cache.innerHTML = '';
-  cache.appendChild(todoPage);
-
-  window.scrollX = 0;
-  window.scrollY = 0;
+  main.appendChild(todoPage);
 }
 
-export async function getTodoById(id) {}
+export async function getTodo(id) {
+  if (app.store.todosList === null) {
+    await loadTodos();
+  }
+
+  for (let todo of app.store.todosList) {
+    if (todo.id === id) return todo;
+  }
+
+  return null;
+}
+
+export async function editTodo(id) {}
+
+export async function deleteTodo(id) {}

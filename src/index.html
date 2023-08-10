@@ -12,9 +12,12 @@
     <main></main>
 
     <template id="todo-page-template">
-      <section>
-        <h1>Cesar's Todos</h1>
-        <div id="todo-input"></div>
+      <section class="app-container">
+        <h1></h1>
+        <div id="todo-input">
+          <input type="text" id="new-todo" name="new-todo" />
+          <button>Add</button>
+        </div>
         <ul id="todo-list"></ul>
       </section>
     </template>
@@ -22,16 +25,11 @@
     <template id="todo-item-template">
       <li>
         <p class="name"></p>
-        <p class="status"></p>
         <p class="toolbar">
-          <a href="#" class="edit-button"> ✏️ </a>
-          <a href="#" class="delete-button"> 🗑️ </a>
+          <a href="#" class="edit-bttn"> ✏️ </a>
+          <a href="#" class="delete-bttn"> 🗑️ </a>
         </p>
       </li>
-    </template>
-
-    <template id="todo-input-template">
-      <input type="text" id="new-todo" name="new-todo" />
     </template>
   </body>
 </html>

@@ -1,6 +1,17 @@
 const Store = {
-  currentTodo: null,
-  todosList: [],
+  todosList: null,
 };
 
-export default Store;
+const proxiedStore = new Proxy(Store, {
+  set(target, property, value) {
+    target[property] = value;
+
+    if (property === 'todosList') {
+      window.dispatchEvent(new Event('apptodoslistchange'));
+    }
+
+    return true;
+  },
+});
+
+export default proxiedStore;
