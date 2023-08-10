@@ -7,8 +7,6 @@ export async function loadTodos() {
 export function loadComponents() {
   const main = document.querySelector('main');
   const todoPage = document.createElement('todo-page');
-  const todoInput = document.createElement('todo-input');
-  const todoItem = document.createElement('todo-item');
 
   main.appendChild(todoPage);
 }
