@@ -1,9 +1,11 @@
-const API = {
-  url: 'http://localhost:3000/todos',
-  fetchTodos: async () => {
-    const result = await fetch(API.url);
-    return await result.json();
-  },
-};
+export const URL = 'http://localhost:3000/todos';
 
-export default API;
+export async function fetchTodos() {
+  try {
+    const result = await fetch(URL);
+    const response = await result.json();
+    return response;
+  } catch (err) {
+    return null;
+  }
+}
