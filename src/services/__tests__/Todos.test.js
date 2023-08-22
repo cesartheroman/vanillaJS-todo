@@ -55,12 +55,6 @@ describe('Todo Service', () => {
     expect(todo).toBe(null);
   });
 
-  test('editTodo should return null if todo does not exist', () => {
-    const todo = TodoService.editTodo(10, todos, {});
-
-    expect(todo).toBe(null);
-  });
-
   test('editTodo should return edited todo', () => {
     const editDetails = { name: 'My first edit' };
     const todo = TodoService.editTodo(1, todos, editDetails);
@@ -71,6 +65,12 @@ describe('Todo Service', () => {
       completed: false,
       active: false,
     });
+  });
+
+  test('deleteTodo should return null if todo does not exist', () => {
+    const restOfTodos = TodoService.deleteTodo(10, todos);
+
+    expect(restOfTodos).toBe(null);
   });
 
   test('deleteTodo should delete the todo', () => {

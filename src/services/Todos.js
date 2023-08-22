@@ -27,6 +27,10 @@ export function editTodo(id, todos, editDetails) {
 }
 
 export function deleteTodo(id, todos) {
+  const todo = getTodo(id, todos);
+
+  if (!todo) return null;
+
   const restOfTodos = todos.filter((todo) => todo.id !== id);
 
   return restOfTodos;
