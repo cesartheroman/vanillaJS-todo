@@ -1,13 +1,17 @@
 import { TodoPage } from '../TodoPage.js';
+import Store from '../../services/Store.js';
 import {
   createMockTodoPageTemplate,
   sampleTodo,
 } from '../__fixtures__/index.js';
 
+window.app = {};
+app.store = Store;
+
 describe('TodoPage', () => {
   let todoPage;
   beforeEach(() => {
-    todoItem = new TodoPage();
+    todoPage = new TodoPage();
 
     document.getElementById = jest.fn(() => createMockTodoPageTemplate());
   });
@@ -15,9 +19,9 @@ describe('TodoPage', () => {
   it('should call appendChild to add template content', () => {
     todoPage.appendChild = jest.spyOn(document.body, 'appendChild');
 
-    todoItem.connectedCallback();
+    todoPage.connectedCallback();
 
-    expect(todoItem.appendChild);
+    expect(todoPage.appendChild).toHaveBeenCalled();
   });
 
   it.todo('should add eventListener');
