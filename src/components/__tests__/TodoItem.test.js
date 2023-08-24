@@ -33,11 +33,6 @@ describe('TodoItem', () => {
     todoItem.dataset.item = JSON.stringify(sampleTodo);
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-    document.body.innerHTML = '';
-  });
-
   it('should call appendChild to add template content', () => {
     todoItem.appendChild = jest.spyOn(document.body, 'appendChild');
 
