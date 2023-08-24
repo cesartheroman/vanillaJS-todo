@@ -1,10 +1,10 @@
 import { TodoPage } from '../TodoPage.js';
 
-describe(TodoPage, () => {
-  it.skip('should render the component in the DOM', () => {
-    const test = new TodoPage();
-
-    console.log(test);
+describe('TodoPage', () => {
+  it.skip('should call the connectedCallback function', () => {
+    const todoPage = new TodoPage();
+    console.log(TodoPage);
+    expect(todoPage).toHaveBeenCalledTimes(1);
   });
 });
 //TODO: describe block for connectedCallback

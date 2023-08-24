@@ -12,12 +12,17 @@ export class TodoItem extends HTMLElement {
 
     const todoItem = JSON.parse(this.dataset.item);
 
-    this.querySelector('.name').textContent = `${todoItem.name}`;
-    this.querySelector('.edit-bttn').addEventListener('click', (e) => {
+    const todoName = this.querySelector('.name');
+    todoName.textContent = `${todoItem.name}`;
+
+    const editButton = this.querySelector('.edit-bttn');
+    editButton.addEventListener('click', (e) => {
       e.preventDefault();
       console.log('edit!');
     });
-    this.querySelector('.delete-bttn').addEventListener('click', (e) => {
+
+    const deleteButton = this.querySelector('.delete-bttn');
+    deleteButton.addEventListener('click', (e) => {
       e.preventDefault();
       console.log('delete!');
     });
