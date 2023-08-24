@@ -7,7 +7,8 @@ const proxiedStore = new Proxy(Store, {
     target[property] = value;
 
     if (property === 'todosList') {
-      window.dispatchEvent(new Event('apptodoslistchange'));
+      const newEvent = new Event('apptodoslistchange');
+      window.dispatchEvent(newEvent);
     }
 
     return true;
