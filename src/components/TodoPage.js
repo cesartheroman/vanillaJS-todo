@@ -9,12 +9,12 @@ export class TodoPage extends HTMLElement {
 
     this.appendChild(content);
 
-    const h1 = this.querySelector('h1');
-    h1.textContent = "Cesar's Todos";
-
     window.addEventListener('apptodoslistchange', () => {
       this.render();
     });
+
+    const h1 = this.querySelector('h1');
+    h1.textContent = "Cesar's Todos";
 
     this.render();
   }

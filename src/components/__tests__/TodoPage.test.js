@@ -1,11 +1,32 @@
 import { TodoPage } from '../TodoPage.js';
+import {
+  createMockTodoPageTemplate,
+  sampleTodo,
+} from '../__fixtures__/index.js';
 
 describe('TodoPage', () => {
-  it.skip('should call the connectedCallback function', () => {
-    const todoPage = new TodoPage();
-    console.log(TodoPage);
-    expect(todoPage).toHaveBeenCalledTimes(1);
+  let todoPage;
+  beforeEach(() => {
+    todoItem = new TodoPage();
+
+    document.getElementById = jest.fn(() => createMockTodoPageTemplate());
   });
+
+  it('should call appendChild to add template content', () => {
+    todoPage.appendChild = jest.spyOn(document.body, 'appendChild');
+
+    todoItem.connectedCallback();
+
+    expect(todoItem.appendChild);
+  });
+
+  it.todo('should add eventListener');
+
+  it.todo('shoudl call this.render');
+
+  it.todo('should show loading text if todosList is empty');
+
+  it.todo('should call appendChild with todoItem');
 });
 //TODO: describe block for connectedCallback
 //should call appendCHild

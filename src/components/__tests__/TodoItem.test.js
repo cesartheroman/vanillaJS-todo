@@ -1,26 +1,8 @@
 import { TodoItem } from '../TodoItem.js';
-
-const createMockTemplate = () => {
-  const mockTemplate = document.createElement('template');
-  mockTemplate.innerHTML = `
-  <li>
-    <p class="name"></span>
-    <p class="toolbar">
-       <button class="edit-bttn">✏️</button>
-       <button class="delete-bttn">🗑️</button>
-    </p>
-  </li>
-`;
-
-  return mockTemplate;
-};
-
-const sampleTodo = {
-  id: 1,
-  name: 'Finish Todo App',
-  completed: false,
-  active: false,
-};
+import {
+  createMockTodoItemTemplate,
+  sampleTodo,
+} from '../__fixtures__/index.js';
 
 describe('TodoItem', () => {
   let todoItem;
@@ -28,7 +10,7 @@ describe('TodoItem', () => {
   beforeEach(() => {
     todoItem = new TodoItem();
 
-    document.getElementById = jest.fn(() => createMockTemplate());
+    document.getElementById = jest.fn(() => createMockTodoItemTemplate());
 
     todoItem.dataset.item = JSON.stringify(sampleTodo);
   });
