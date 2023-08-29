@@ -1,14 +1,11 @@
-import { TodoPage } from '../TodoPage.js';
-import Store from '../../services/Store.js';
-import {
-  createMockTodoPageTemplate,
-  sampleTodo,
-} from '../__fixtures__/index.js';
+import { TodoPage } from "../TodoPage.js";
+import Store from "../../services/Store.js";
+import { createMockTodoPageTemplate } from "../__fixtures__/index.js";
 
 window.app = {};
 app.store = Store;
 
-describe('TodoPage', () => {
+describe("TodoPage", () => {
   let todoPage;
   beforeEach(() => {
     todoPage = new TodoPage();
@@ -16,26 +13,41 @@ describe('TodoPage', () => {
     document.getElementById = jest.fn(() => createMockTodoPageTemplate());
   });
 
-  it('should call appendChild to add template content', () => {
-    todoPage.appendChild = jest.spyOn(document.body, 'appendChild');
+  it("should call appendChild to add template content", () => {
+    todoPage.appendChild = jest.spyOn(document.body, "appendChild");
+
+    todoPage.connectedCallback();
+    const templateFragment = new DocumentFragment();
+
+    expect(todoPage.appendChild).toHaveBeenCalled();
+    expect(todoPage.appendChild).toHaveBeenCalledWith(templateFragment);
+  });
+
+  it("should call this.render", () => {
+    todoPage.render = jest.spyOn(todoPage, "render");
 
     todoPage.connectedCallback();
 
-    expect(todoPage.appendChild).toHaveBeenCalled();
+    expect(todoPage.render).toHaveBeenCalled();
   });
 
-  it.todo('should add eventListener');
+  it("should show loading text if todosList is empty", () => {
+    todoPage.connectedCallback();
 
-  it.todo('shoudl call this.render');
+    const loadingText = todoPage.querySelector("#todo-list").innerHTML;
 
-  it.todo('should show loading text if todosList is empty');
+    expect(loadingText).toBe("Loading...");
+  });
 
-  it.todo('should call appendChild with todoItem');
+  it("should call appendChild with todoItem", () => {
+    todoPage.connectedCallback();
+
+    const ulElement = todoPage.querySelector("ul");
+    ulElement.appendChild = jest.spyOn(document.body, "appendChild");
+
+    const templateFragment = new DocumentFragment();
+
+    expect(ulElement.appendChild).toHaveBeenCalled();
+    expect(ulElement.appendChild).toHaveBeenCalledWith(templateFragment);
+  });
 });
-//TODO: describe block for connectedCallback
-//should call appendCHild
-//should addEventListener
-//should call this.render()
-
-//if get into DOM manipulation for checking text on the page
-//if todo list is null should see "loading..."
