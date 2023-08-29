@@ -1,27 +1,25 @@
 import * as TodoService from '../Todos.js';
 import todos from '../__fixtures__/todos.js';
+import Store from '../Store.js';
 
 describe('Todo Service', () => {
+  window.app = {};
+  app.store = Store;
+
   global.fetch = jest.fn(() =>
     Promise.resolve({
       json: () => Promise.resolve(todos),
     })
   );
 
-  beforeEach(() => {
-    fetch.mockClear();
-  });
-
   test('todosList should be empty before initialization', async () => {
-    const testStore = { todosList: null };
-    expect(testStore.todosList).toBe(null);
+    expect(app.store.todosList).toBe(null);
   });
 
   test('setTodos should set initilal Todos to Store', async () => {
-    const testStore = { todosList: null };
-    await TodoService.setTodos(testStore);
+    await TodoService.setTodos();
 
-    expect(testStore.todosList.length).toBeGreaterThan(0);
+    expect(app.store.todosList.length).toBeGreaterThan(0);
   });
 
   test('loadTodoPage should create todo-page element and append it', () => {
@@ -39,7 +37,7 @@ describe('Todo Service', () => {
   });
 
   test('getTodo should get the todo by ID', () => {
-    const todo = TodoService.getTodo(1, todos);
+    const todo = TodoService.getTodo(1);
 
     expect(todo).toEqual({
       id: 1,
@@ -50,20 +48,14 @@ describe('Todo Service', () => {
   });
 
   test('getTodo should return null if todo does not exist', () => {
-    const todo = TodoService.getTodo(10, todos);
-
-    expect(todo).toBe(null);
-  });
-
-  test('editTodo should return null if todo does not exist', () => {
-    const todo = TodoService.editTodo(10, todos, {});
+    const todo = TodoService.getTodo(10);
 
     expect(todo).toBe(null);
   });
 
   test('editTodo should return edited todo', () => {
     const editDetails = { name: 'My first edit' };
-    const todo = TodoService.editTodo(1, todos, editDetails);
+    const todo = TodoService.editTodo(1, editDetails);
 
     expect(todo).toEqual({
       id: 1,
@@ -73,8 +65,14 @@ describe('Todo Service', () => {
     });
   });
 
+  test('deleteTodo should return null if todo does not exist', () => {
+    const restOfTodos = TodoService.deleteTodo(10);
+
+    expect(restOfTodos).toBe(null);
+  });
+
   test('deleteTodo should delete the todo', () => {
-    const restOfTodos = TodoService.deleteTodo(1, todos);
+    const restOfTodos = TodoService.deleteTodo(1);
 
     expect(restOfTodos.length).toBeLessThan(todos.length);
   });

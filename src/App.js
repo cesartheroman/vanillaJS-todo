@@ -7,6 +7,6 @@ window.app = {};
 app.store = Store;
 
 window.addEventListener('DOMContentLoaded', () => {
-  setTodos(app.store);
+  setTodos();
   loadTodoPage();
 });

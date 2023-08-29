@@ -1,28 +1,26 @@
 export class TodoPage extends HTMLElement {
   constructor() {
     super();
-
-    this.root = this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
     const template = document.getElementById('todo-page-template');
     const content = template.content.cloneNode(true);
 
-    this.root.appendChild(content);
-
-    const h1 = this.root.querySelector('h1');
-    h1.textContent = "Cesar's Todos";
+    this.appendChild(content);
 
     window.addEventListener('apptodoslistchange', () => {
       this.render();
     });
 
+    const h1 = this.querySelector('h1');
+    h1.textContent = "Cesar's Todos";
+
     this.render();
   }
 
   render() {
-    const list = this.root.querySelector('#todo-list');
+    const list = this.querySelector('#todo-list');
 
     if (app.store.todosList) {
       list.innerHTML = '';
@@ -31,7 +29,7 @@ export class TodoPage extends HTMLElement {
         const todoItem = document.createElement('todo-item');
         todoItem.dataset.item = JSON.stringify(todo);
 
-        this.root.querySelector('ul').appendChild(todoItem);
+        this.querySelector('ul').appendChild(todoItem);
       }
     } else {
       list.innerHTML = 'Loading...';

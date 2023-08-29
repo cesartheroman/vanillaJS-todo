@@ -15,7 +15,5 @@ describe('Store Service', () => {
     expect(eventSpy).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'apptodoslistchange' })
     );
-
-    eventSpy.mockRestore();
   });
 });

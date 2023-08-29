@@ -8,10 +8,6 @@ describe('API Service', () => {
     })
   );
 
-  beforeEach(() => {
-    fetch.mockClear();
-  });
-
   test('fetchTodos should be called with correct URL', async () => {
     await fetchTodos();
 

@@ -1,7 +1,7 @@
 import { fetchTodos } from './API.js';
 
-export async function setTodos(store) {
-  store.todosList = await fetchTodos();
+export async function setTodos() {
+  app.store.todosList = await fetchTodos();
 }
 
 export function loadTodoPage() {
@@ -11,13 +11,13 @@ export function loadTodoPage() {
   main.appendChild(todoPage);
 }
 
-export function getTodo(id, todos) {
-  const [todo] = todos.filter((todo) => todo.id === id);
+export function getTodo(id) {
+  const [todo] = app.store.todosList.filter((todo) => todo.id === id);
   return todo ? todo : null;
 }
 
-export function editTodo(id, todos, editDetails) {
-  const todo = getTodo(id, todos);
+export function editTodo(id, editDetails) {
+  const todo = getTodo(id, app.store.todosList);
 
   if (!todo) return null;
 
@@ -26,8 +26,12 @@ export function editTodo(id, todos, editDetails) {
   return editedTodo;
 }
 
-export function deleteTodo(id, todos) {
-  const restOfTodos = todos.filter((todo) => todo.id !== id);
+export function deleteTodo(id) {
+  const todo = getTodo(id);
+
+  if (!todo) return null;
+
+  const restOfTodos = app.store.todosList.filter((todo) => todo.id !== id);
 
   return restOfTodos;
 }
