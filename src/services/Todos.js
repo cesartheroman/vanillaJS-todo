@@ -11,6 +11,11 @@ export function loadTodoPage() {
   main.appendChild(todoPage);
 }
 
+export function createTodo(newTodo) {
+  app.store.todosList = [...app.store.todosList, newTodo]; 
+  return app.store.todosList;
+}
+
 export function getTodo(id) {
   const [todo] = app.store.todosList.filter((todo) => todo.id === id);
   return todo ? todo : null;
@@ -24,7 +29,7 @@ export function editTodos(id, editDetails) {
       return todo;
     }
   });
-  console.log(updatedTodosList);
+
   return updatedTodosList;
 }
 
