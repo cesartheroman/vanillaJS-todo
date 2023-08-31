@@ -14,17 +14,29 @@ export class TodoItem extends HTMLElement {
 
     const todoItem = JSON.parse(this.dataset.item);
 
-    const todoName = this.querySelector(".name");
+    const todoName = this.querySelector(".todo-name");
     todoName.textContent = `${todoItem.name}`;
+    
+    //TODO: finish logic for handling edit button and then handling
+    //submission of the edited todo
+    // const submitEditedTodo = () => {
+    //   
+    // };
+
+    const editTodoInput = this.querySelector('#edit-todo');
+    editTodoInput.addEventListener('submit', () => {
+      submitEditedTodo(); 
+    })
 
     const eventHandler = (event) => {
       const className = event.target.className;
 
       if (className === "edit-bttn") {
-        const editDetail = { name: "editedName" };
-        const updatedTodosList = editTodos(todoItem.id, editDetail);
-
-        app.store.todosList = updatedTodosList;
+        const editTodoInput = this.querySelector('#edit-todo');
+        editTodoInput.hidden =  false;
+        console.log(editTodoInput);
+        // const editDetails = { name: "editedName" };
+        // editTodos(todoItem.id, editDetails)
       }
       if (className === "delete-bttn") {
         console.log(deleteTodo(todoItem.id));

@@ -19,7 +19,6 @@ export class TodoPage extends HTMLElement {
     h1.textContent = "Cesar's Todos";
 
     const addTodoButton = this.querySelector('.create-todo-bttn');
-
     addTodoButton.addEventListener('click', () => {
       const todoName = this.querySelector('#new-todo').value;
       const newId = app.store.todosList[app.store.todosList.length - 1].id;
@@ -31,7 +30,6 @@ export class TodoPage extends HTMLElement {
       }
 
      createTodo(newTodo); 
-
     })
 
     this.render();

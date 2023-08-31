@@ -13,7 +13,7 @@ export function loadTodoPage() {
 
 export function createTodo(newTodo) {
   app.store.todosList = [...app.store.todosList, newTodo]; 
-  return app.store.todosList;
+  // return app.store.todosList;
 }
 
 export function getTodo(id) {
@@ -29,8 +29,8 @@ export function editTodos(id, editDetails) {
       return todo;
     }
   });
-
-  return updatedTodosList;
+  app.store.todosList = updatedTodosList;
+  // return updatedTodosList;
 }
 
 export function deleteTodo(id) {
