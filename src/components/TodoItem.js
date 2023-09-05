@@ -14,32 +14,28 @@ export class TodoItem extends HTMLElement {
 
     const todoItem = JSON.parse(this.dataset.item);
 
-    const todoName = this.querySelector(".todo-name");
-    todoName.textContent = `${todoItem.name}`;
-    
-    //TODO: finish logic for handling edit button and then handling
-    //submission of the edited todo
-    // const submitEditedTodo = () => {
-    //   
-    // };
-
-    const editTodoInput = this.querySelector('#edit-todo');
-    editTodoInput.addEventListener('submit', () => {
-      submitEditedTodo(); 
-    })
+    const todoName = this.querySelector('.toggle');
+    todoName.textContent = `${todoItem.name}`; 
 
     const eventHandler = (event) => {
       const className = event.target.className;
+      const editTodoInput = this.querySelector('.todo-name');
 
       if (className === "edit-bttn") {
-        const editTodoInput = this.querySelector('#edit-todo');
-        editTodoInput.hidden =  false;
-        console.log(editTodoInput);
-        // const editDetails = { name: "editedName" };
-        // editTodos(todoItem.id, editDetails)
+        todoName.hidden = true;
+        editTodoInput.hidden = false;
+        editTodoInput.placeholder = `${todoItem.name}`;
+        saveButton.hidden = false;
       }
+
+      if(className === 'save-todo') {
+        const editDetails = {name: editTodoInput.value }
+
+        editTodos(todoItem.id, editDetails)
+      }
+
       if (className === "delete-bttn") {
-        console.log(deleteTodo(todoItem.id));
+        deleteTodo(todoItem.id);
       }
     };
 
@@ -54,6 +50,12 @@ export class TodoItem extends HTMLElement {
       e.preventDefault();
       eventHandler(e);
     });
+
+    const saveButton = this.querySelector('.save-todo');
+    saveButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      eventHandler(e);
+    })
   }
 }
 customElements.define("todo-item", TodoItem);

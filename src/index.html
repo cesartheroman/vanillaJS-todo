@@ -24,8 +24,9 @@
 
     <template id="todo-item-template">
       <li>
-        <input type="text" id="edit-todo" name="edit-todo" hidden/>
-        <p class="todo-name"></p>
+        <label class="toggle" for="todo-name"></label>
+        <input type="text" class="todo-name" placeholder="" name="todo-name" hidden />
+        <button class="save-todo" hidden>✅</button>
         <p class="toolbar">
           <button class="edit-bttn">✏️</button>
           <button class="delete-bttn">🗑️</button>

@@ -13,7 +13,6 @@ export function loadTodoPage() {
 
 export function createTodo(newTodo) {
   app.store.todosList = [...app.store.todosList, newTodo]; 
-  // return app.store.todosList;
 }
 
 export function getTodo(id) {
@@ -30,7 +29,6 @@ export function editTodos(id, editDetails) {
     }
   });
   app.store.todosList = updatedTodosList;
-  // return updatedTodosList;
 }
 
 export function deleteTodo(id) {
@@ -40,5 +38,5 @@ export function deleteTodo(id) {
 
   const restOfTodos = app.store.todosList.filter((todo) => todo.id !== id);
 
-  return restOfTodos;
+  app.store.todosList = restOfTodos;
 }
