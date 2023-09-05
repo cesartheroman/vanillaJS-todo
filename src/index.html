@@ -14,9 +14,9 @@
     <template id="todo-page-template">
       <section class="app-container">
         <h1></h1>
-        <div id="todo-input">
+        <div class="todo-input">
           <input type="text" id="new-todo" name="new-todo" />
-          <button>Add</button>
+          <button class="create-todo-bttn">Add</button>
         </div>
         <ul id="todo-list"></ul>
       </section>
@@ -24,7 +24,9 @@
 
     <template id="todo-item-template">
       <li>
-        <p class="name"></p>
+        <label class="toggle" for="todo-name"></label>
+        <input type="text" class="todo-name" placeholder="" name="todo-name" hidden />
+        <button class="save-todo" hidden>✅</button>
         <p class="toolbar">
           <button class="edit-bttn">✏️</button>
           <button class="delete-bttn">🗑️</button>

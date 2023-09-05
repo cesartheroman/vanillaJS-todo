@@ -12,6 +12,10 @@ describe('Todo Service', () => {
     })
   );
 
+  afterEach(() => {
+    app.store.todosList = todos;
+  })
+
   test('todosList should be empty before initialization', async () => {
     expect(app.store.todosList).toBe(null);
   });
@@ -36,6 +40,18 @@ describe('Todo Service', () => {
     expect(parentChild).not.toBe(null);
   });
 
+  test('createTodo should create a new todo', () => {
+    const newTodo = { 
+      id: 69,
+      name: "New todo",
+      completed: false,
+      active: false
+    }
+
+    const updatedTodos = TodoService.createTodo(newTodo);
+    expect(updatedTodos).toEqual([...todos, newTodo]);
+  });
+
   test('getTodo should get the todo by ID', () => {
     const todo = TodoService.getTodo(1);
 
@@ -53,16 +69,30 @@ describe('Todo Service', () => {
     expect(todo).toBe(null);
   });
 
-  test('editTodo should return edited todo', () => {
-    const editDetails = { name: 'My first edit' };
-    const todo = TodoService.editTodo(1, editDetails);
-
-    expect(todo).toEqual({
+  test('editTodo should return edited todo with rest of todos', () => {
+    const editedTodo = { 
       id: 1,
-      name: 'My first edit',
+      name: 'My first edit', 
       completed: false,
       active: false,
-    });
+    };
+    const updatedTodos = TodoService.editTodos(editedTodo.id, editedTodo);
+
+    expect([
+        { id: 1, name: 'My first edit', completed: false, active: false },
+        {
+          id: 2,
+          name: 'Finish JUC Tech Challenge',
+          completed: false,
+          active: false
+        },
+        {
+          id: 3,
+          name: 'Finish Expense Tracker',
+          completed: false,
+          active: false
+        }
+      ]).toEqual(updatedTodos);
   });
 
   test('deleteTodo should return null if todo does not exist', () => {
