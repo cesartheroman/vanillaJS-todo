@@ -15,7 +15,7 @@ export class TodoItem extends HTMLElement {
     const todoItem = JSON.parse(this.dataset.item);
 
     const todoName = this.querySelector('.toggle');
-    todoName.textContent = `${todoItem.name}`; 
+    todoName.innerHTML = `${todoItem.name}`; 
 
     const eventHandler = (event) => {
       const className = event.target.className;

@@ -1,4 +1,5 @@
 import { createTodo } from "../services/Todos.js";
+import ProxiedStore from "../services/Store.js";
 
 export class TodoPage extends HTMLElement {
   constructor() {
@@ -18,19 +19,20 @@ export class TodoPage extends HTMLElement {
     const h1 = this.querySelector("h1");
     h1.textContent = "Cesar's Todos";
 
-    const addTodoButton = this.querySelector('.create-todo-bttn');
-    addTodoButton.addEventListener('click', () => {
-      const todoName = this.querySelector('#new-todo').value;
-      const newId = app.store.todosList[app.store.todosList.length - 1].id;
+    const addTodoButton = this.querySelector(".create-todo-bttn");
+    addTodoButton.addEventListener("click", () => {
+      const todoName = this.querySelector("#new-todo").value;
+      const newId =
+        ProxiedStore.todosList[ProxiedStore.todosList.length - 1].id;
       const newTodo = {
         id: newId + 1,
         name: todoName,
         active: false,
-        compeleted: false
-      }
+        compeleted: false,
+      };
 
-     createTodo(newTodo); 
-    })
+      createTodo(newTodo);
+    });
 
     this.render();
   }
@@ -38,10 +40,10 @@ export class TodoPage extends HTMLElement {
   render() {
     const list = this.querySelector("#todo-list");
 
-    if (app.store.todosList) {
+    if (ProxiedStore.todosList) {
       list.innerHTML = "";
 
-      for (let todo of app.store.todosList) {
+      for (let todo of ProxiedStore.todosList) {
         const todoItem = document.createElement("todo-item");
         todoItem.dataset.item = JSON.stringify(todo);
 
