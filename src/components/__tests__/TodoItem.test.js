@@ -13,16 +13,29 @@ describe('TodoItem', () => {
 
   beforeEach(() => {
     todoItem = new TodoItem();
-
-    document.getElementById = jest.fn(() => createMockTodoItemTemplate());
+    // document.getElementById = jest.fn(() => createMockTodoItemTemplate());
 
     todoItem.dataset.item = JSON.stringify(sampleTodo);
-  });
-
-  it('should call appendChild to add template content', () => {
     todoItem.appendChild = jest.spyOn(document.body, 'appendChild');
+    // todoItem.querySelector = jest.spyOn(document.body, 'querySelector').mockImplementation((selector) => {
+    //   switch(selector) {
+    //     case '.toggle':
+    //       return document.createElement('label');
+    //     case '.todo-name':
+    //       return document.createElement('input');
+    //     case '.edit-bttn': case'.delete-bttn': case '.save-todo': 
+    //       return document.createElement('button');
+    //   }
+    // });
 
+  });
+/**
+ * @jest-environment jsdom
+ */
+  it('should call appendChild to add template content', () => {
     todoItem.connectedCallback();
+    const validateElement = document.getElementsByClassName('.toggle');
+    console.log(validateElement);
 
     expect(todoItem.appendChild).toHaveBeenCalled();
   });
@@ -30,7 +43,7 @@ describe('TodoItem', () => {
   it('should set the name content from the dataset', () => {
     todoItem.connectedCallback();
 
-    const todoName = todoItem.querySelector('.name').textContent;
+    const todoName = todoItem.querySelector('.toggle').innerHTML;
     expect(todoName).toBe('Finish Todo App');
   });
 

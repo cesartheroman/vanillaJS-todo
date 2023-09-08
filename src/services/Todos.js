@@ -1,7 +1,8 @@
 import { fetchTodos } from "./API.js";
+import ProxiedStore from "./Store.js";
 
 export async function setTodos() {
-  app.store.todosList = await fetchTodos();
+  ProxiedStore.todosList = await fetchTodos();
 }
 
 export function loadTodoPage() {
@@ -12,23 +13,23 @@ export function loadTodoPage() {
 }
 
 export function createTodo(newTodo) {
-  app.store.todosList = [...app.store.todosList, newTodo]; 
+  ProxiedStore.todosList = [...ProxiedStore.todosList, newTodo];
 }
 
 export function getTodo(id) {
-  const [todo] = app.store.todosList.filter((todo) => todo.id === id);
+  const [todo] = ProxiedStore.todosList.filter((todo) => todo.id === id);
   return todo ? todo : null;
 }
 
 export function editTodos(id, editDetails) {
-  const updatedTodosList = app.store.todosList.map((todo) => {
+  const updatedTodosList = ProxiedStore.todosList.map((todo) => {
     if (todo.id === id) {
       return { ...todo, ...editDetails };
     } else {
       return todo;
     }
   });
-  app.store.todosList = updatedTodosList;
+  ProxiedStore.todosList = updatedTodosList;
 }
 
 export function deleteTodo(id) {
@@ -36,7 +37,7 @@ export function deleteTodo(id) {
 
   if (!todo) return null;
 
-  const restOfTodos = app.store.todosList.filter((todo) => todo.id !== id);
+  const restOfTodos = ProxiedStore.todosList.filter((todo) => todo.id !== id);
 
-  app.store.todosList = restOfTodos;
+  ProxiedStore.todosList = restOfTodos;
 }

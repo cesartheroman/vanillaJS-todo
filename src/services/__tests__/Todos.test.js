@@ -48,8 +48,8 @@ describe('Todo Service', () => {
       active: false
     }
 
-    const updatedTodos = TodoService.createTodo(newTodo);
-    expect(updatedTodos).toEqual([...todos, newTodo]);
+    TodoService.createTodo(newTodo);
+    expect(todos).toEqual([...todos, newTodo]);
   });
 
   test('getTodo should get the todo by ID', () => {
