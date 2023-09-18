@@ -1,0 +1,22 @@
+todo-page {
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  border: solid;
+  display: flex;
+  flex-direction: column;
+  padding: 5rem;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.todo-input {
+  display: flex;
+  justify-content: space-evenly;
+  space-around:
+}
