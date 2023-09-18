@@ -21,16 +21,21 @@ export class TodoPage extends HTMLElement {
 
     const addTodoButton = this.querySelector(".create-todo-bttn");
     addTodoButton.addEventListener("click", () => {
-      const todoName = this.querySelector("#new-todo").value;
-      const newId =
+      const newTodoInput = this.querySelector("#new-todo");
+      console.log("newtodo input:", newTodoInput);
+      newTodoInput.placeholder = "What needs to be done?";
+      const newTodoName = newTodoInput.value;
+      const newTodoId =
         ProxiedStore.todosList[ProxiedStore.todosList.length - 1].id;
+
       const newTodo = {
-        id: newId + 1,
-        name: todoName,
+        id: newTodoId + 1,
+        name: newTodoName,
         active: false,
         compeleted: false,
       };
 
+      newTodoInput.value = "";
       createTodo(newTodo);
     });
 
